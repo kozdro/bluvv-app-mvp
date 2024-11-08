@@ -14,6 +14,7 @@
           autoplay
           loop
           muted
+          preload="none"
           class="w-full h-full object-cover"
           @click="toggleVideo(index)"
         />
