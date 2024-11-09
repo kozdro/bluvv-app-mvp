@@ -7,7 +7,7 @@
     @slideChange="handleSlideChange"
   >
     <SwiperSlide v-for="(video, index) in videos" :key="index">
-      <div class="w-full h-full overflow-hidden bg-black relative">
+      <div class="w-full h-full overflow-hidden bg-black relative" :class="{ 'opacity-70': isCommentsModelOpen }">
         <video
           :ref="el => videoRef[index] = el"
           :src="video.url"
@@ -45,7 +45,7 @@
             </svg>
             <span class="text-xs drop-shadow" v-text="video.likes" />
           </button>
-          <button class="p-2 text-white flex flex-col items-center gap-1">
+          <button class="p-2 text-white flex flex-col items-center gap-1" @click="toggleCommentsModal(index)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -91,6 +91,34 @@
           />
         </div>
       </div>
+
+      <div v-if="isCommentsModelOpen" class="fixed bottom-0 left-0 w-full bg-white h-2/3 rounded-t-lg p-4 overflow-y-auto z-[2000]">
+        <div class="flex justify-between items-center mb-4 border-b pb-2">
+          <h3 class="text-lg font-bold" v-text="'Comments'" />
+          <button
+            class="text-gray-700 text-xl"
+            @click="toggleCommentsModal"
+          >
+            &times;
+          </button>
+        </div>
+
+        <ul class="space-y-4">
+          <li
+            v-for="(comment, index) in videos[activeVideoIndex].commentsList"
+            :key="index"
+            class="flex gap-3 items-start"
+          >
+          <div class="w-10 h-10 rounded-full bg-gray-300 flex-shrink-0" />
+            <div>
+              <div class="font-bold text-sm text-gray-900" v-text="`User ${index + 1}`" />
+              <div class="text-gray-800 text-sm" v-text="comment" />
+            </div>
+          </li>
+        </ul>
+
+        <button class="mt-8 w-full py-2 bg-gray-200 text-gray-700 rounded-lg font-bold" v-text="'Load More Comments'" />
+      </div>
     </SwiperSlide>
   </Swiper>
 </template>
@@ -110,6 +138,13 @@ const videos = ref([
     productName: 'Black sheet mask',
     productPrice: 4.34,
     productImage: require('../assets/photos/mask.jpg'),
+    commentsList: [
+      'This mask works wonders! My skin feels so soft afterward.',
+      'I love using it after a long day. It’s so refreshing!',
+      'Does it work for sensitive skin? I have very delicate skin and I’m curious.',
+      'Absolutely love this product. I use it twice a week!',
+      'Perfect for a quick spa day at home.',
+    ],
   },
   {
     url: require('../assets/videos/film-2.mp4'),
@@ -120,6 +155,13 @@ const videos = ref([
     productName: 'Gel face cream',
     productPrice: 18.95,
     productImage: require('../assets/photos/cream.jpeg'),
+    commentsList: [
+      'Best cream I have used! Keeps my skin hydrated all day.',
+      'I’ve tried many creams, but this one really works for me.',
+      'Worth the price! A little goes a long way.',
+      'I love the texture of this cream, not too oily.',
+      'It’s perfect for dry skin. My face feels moisturized all day!',
+    ],
   },
   {
     url: require('../assets/videos/film-3.mp4'),
@@ -130,9 +172,16 @@ const videos = ref([
     productName: 'Curling iron',
     productPrice: 79.90,
     productImage: require('../assets/photos/iron.jpeg'),
+    commentsList: [
+      'Curls my hair perfectly! It’s so easy to use.',
+      'Doesn’t damage my hair at all. I’m in love!',
+      'Heats up really fast! Saves me so much time in the morning.',
+      'I use this curling iron almost every day. Highly recommend it!',
+      'My curls last all day thanks to this iron. Fantastic quality!',
+    ],
   },
   {
-      url: require('../assets/videos/film-4.mp4'),
+    url: require('../assets/videos/film-4.mp4'),
     likes: 324,
     comments: 18,
     shares: 5,
@@ -140,6 +189,13 @@ const videos = ref([
     productName: 'Pinky blush',
     productPrice: 12.65,
     productImage: require('../assets/photos/blush.jpg'),
+    commentsList: [
+      'Beautiful color! It looks so natural on my skin.',
+      'Lasts all day and gives me a nice glow.',
+      'Blends easily and is not too powdery. Love it!',
+      'Perfect for that subtle rosy look. Matches my skin tone perfectly.',
+      'I get compliments on my blush all the time. Great product!',
+    ],
   },
   {
     url: require('../assets/videos/film-5.mp4'),
@@ -150,10 +206,20 @@ const videos = ref([
     productName: 'Mascara High Volume',
     productPrice: 25.40,
     productImage: require('../assets/photos/mascara.jpg'),
+    commentsList: [
+      'Gives my lashes so much volume! No need for falsies anymore.',
+      'No clumps at all, and stays on all day.',
+      'Best mascara I’ve ever tried. My lashes are super long!',
+      'It really gives that high volume effect. My favorite!',
+      'Perfect for dramatic lashes. Great for nights out!',
+    ],
   },
 ])
 const videoRef = ref([])
 const isVideoPlaying = ref(true)
+const isCommentsModelOpen = ref(false)
+const activeVideoIndex = ref(0)
+
 
 const handleLike = (index) => {
   const video = videos.value[index]
@@ -195,6 +261,15 @@ const toggleVideo = (index) => {
     video.pause()
   }
 }
+
+const toggleCommentsModal = (index) => {
+  if (index !== undefined) {
+    activeVideoIndex.value = index
+  }
+
+  isCommentsModelOpen.value = !isCommentsModelOpen.value
+}
+
 
 onMounted(() => {
   videoRef.value = videos.value.map(() => null)
