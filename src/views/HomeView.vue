@@ -79,7 +79,7 @@
       </button>
     </div>
 
-    <div class="absolute bottom-4 left-0 rounded-r-[10rem] p-3 bg-[rgba(0,0,0,0.3)] z-[1000]">
+    <div class="absolute bottom-2 left-0 rounded-r-[10rem] p-3 bg-[rgba(0,0,0,0.3)] z-[1000]">
       <div class="flex items-center gap-4">
         <div class="bg-white h-16 w-16 rounded-full"></div>
         <div class="text-white flex flex-col">
