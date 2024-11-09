@@ -81,8 +81,8 @@
       <div class="absolute top-[70%] left-0 rounded-r-[10rem] p-3 bg-[rgba(0,0,0,0.3)] z-[1000]">
         <div class="flex items-center gap-4">
           <img :src="video.productImage" class="h-16 w-16 rounded-full">
-          <div class="text-white flex flex-col">
-            <span class="text-lg font-bold" v-text="`$${video.productPrice}`" />
+          <div class="text-white flex flex-col w-28">
+            <span class="text-lg font-bold" v-text="`$${video.productPrice.toFixed(2)}`" />
             {{ video.productName }}
           </div>
           <button
