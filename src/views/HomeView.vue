@@ -1,326 +1,117 @@
 <template>
-  <Swiper
-    :slides-per-view="1"
-    direction="vertical"
-    loop
-    class="video-list"
-    @slideChange="handleSlideChange"
-  >
-    <SwiperSlide v-for="(video, index) in videos" :key="index">
-      <div 
-        v-if="isCommentsModelOpen || isShareModalOpen" 
-        class="fixed inset-0 bg-black bg-opacity-50 z-[1500]" 
-        @click="closeModals">
-      </div>
+  <div class="w-full h-full overflow-hidden bg-black relative flex flex-col items-center">
+    <div
+      v-if="isCommentsModelOpen || isShareModalOpen"
+      class="fixed inset-0 bg-black bg-opacity-50 z-[1500]"
+      @click="closeModals"
+    />
 
-      <div class="w-full h-full overflow-hidden bg-black relative">
-        <video
-          :ref="el => videoRef[index] = el"
-          :src="video.url"
-          autoplay
-          loop
-          muted
-          playsinline
-          preload="none"
-          class="w-full h-full object-cover"
-          @click="toggleVideo(index)"
-        />
-        <svg
-          v-if="!isVideoPlaying"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 text-white"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-            clip-rule="evenodd"
+    <Swiper
+      :slides-per-view="1"
+      direction="vertical"
+      loop
+      class="h-full w-full"
+      @slideChange="handleSlideChange"
+    >
+      <SwiperSlide
+        v-for="(video, index) in videos"
+        :key="index"
+        class="w-full h-full overflow-hidden relative bg-black"
+      >
+          <video
+            :ref="el => videoRef[index] = el"
+            :src="video.url"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="none"
+            class="w-full h-full object-cover"
+            @click="toggleVideo(index)"
           />
-        </svg>
-
-        <!-- Interaction panel -->
-        <div class="fixed bottom-1/3 right-2 flex flex-col items-center gap-4 z-[1000]">
-          <button class="p-2 flex flex-col items-center gap-1 text-white" @click="handleLike(index)">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              :fill="video.isLiked ? '#ef4444' : '#FFF'"
-              class="w-8 h-8 transition"
-            >
-              <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
-            </svg>
-            <span class="text-xs drop-shadow" v-text="video.likes" />
-          </button>
-
-          <button class="p-2 text-white flex flex-col items-center gap-1" @click="toggleCommentsModal(index)">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="w-8 h-8"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <span class="text-xs drop-shadow" v-text="video.comments" />
-          </button>
-
-          <button class="p-2 text-white flex flex-col items-center gap-1" @click="toggleShareModal(index)">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="w-8 h-8"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <span class="text-xs drop-shadow" v-text="video.shares" />
-          </button>
-        </div>
-      </div>
-
-      <!-- Product info -->
-      <div class="absolute top-[70%] left-0 rounded-r-[10rem] p-3 bg-[rgba(0,0,0,0.3)] z-[1000]">
-        <div class="flex items-center gap-4">
-          <img :src="video.productImage" class="h-16 w-16 rounded-full">
-          <div class="text-white flex flex-col w-28">
-            <span class="text-lg font-bold" v-text="`$${video.productPrice.toFixed(2)}`" />
-            {{ video.productName }}
-          </div>
-          <button
-            class="bg-green-500 rounded-full w-14 h-14 text-xs flex items-center justify-center text-center text-white font-bold"
-            v-text="'Add to Cart'"
+          <svg
+            v-if="!isVideoPlaying"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 text-white"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+  
+          <InteractionPanel
+            :video="videos[activeVideoIndex]"
+            class="fixed bottom-1/3 right-2"
+            @like="handleLike(index)"
+            @comments="toggleCommentsModal"
+            @share="toggleShareModal"
           />
-        </div>
-      </div>
 
-      <!-- Comments Modal -->
-      <div v-if="isCommentsModelOpen" class="fixed bottom-0 left-0 w-full bg-white h-2/3 rounded-t-lg p-4 overflow-y-auto z-[2000]">
-        <div class="flex justify-between items-center mb-4 border-b pb-2">
-          <h3 class="text-lg font-bold" v-text="'Comments'" />
-          <button
-            class="text-gray-700 text-xl"
-            @click="toggleCommentsModal"
-          >
-            &times;
-          </button>
-        </div>
+          <ProductInfo :video="videos[activeVideoIndex]" class="absolute bottom-6" />
+      </SwiperSlide>
+    </Swiper>
 
-        <ul class="space-y-4">
-          <li
-            v-for="(comment, index) in video.commentsList"
-            :key="index"
-            class="flex gap-3 items-start"
-          >
-          <div class="w-10 h-10 rounded-full bg-gray-300 flex-shrink-0" />
-            <div>
-              <div class="font-bold text-sm text-gray-900" v-text="`User ${index + 1}`" />
-              <div class="text-gray-800 text-sm" v-text="comment" />
-            </div>
-          </li>
-        </ul>
-
-        <button class="mt-8 w-full py-2 bg-gray-200 text-gray-700 rounded-lg font-bold" v-text="'Load More Comments'" />
-      </div>
-
-      <!-- Share Modal -->
-      <div v-if="isShareModalOpen" class="fixed bottom-0 w-full bg-white h-1/4 rounded-t-lg p-4 overflow-y-auto z-[2000]">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-lg font-bold" v-text="'Share'" />
-          <button class="text-gray-700 text-xl" @click="toggleShareModal">
-            &times;
-          </button>
-        </div>
-        <ul class="flex justify-between">
-          <li class="flex flex-col items-center">
-            <i class="fab fa-facebook-square text-3xl text-blue-600" />
-            <span class="text-sm" v-text="'Facebook'" />
-          </li>
-          <li class="flex flex-col items-center">
-            <i class="fab fa-instagram text-3xl text-pink-500" />
-            <span class="text-sm" v-text="'Instagram'" />
-          </li>
-          <li class="flex flex-col items-center">
-            <i class="fab fa-tiktok text-3xl text-black" />
-            <span class="text-sm" v-text="'TikTok'" />
-          </li>
-          <li class="flex flex-col items-center">
-            <i class="fab fa-facebook-messenger text-3xl text-blue-400" />
-            <span class="text-sm" v-text="'Messenger'" />
-          </li>
-          <li class="flex flex-col items-center">
-            <i class="fab fa-whatsapp text-3xl text-green-500" />
-            <span class="text-sm" v-text="'WhatsApp'" />
-          </li>
-        </ul>
-      </div>
-    </SwiperSlide>
-  </Swiper>
+    <CommentsModal
+      v-if="isCommentsModelOpen"
+      :video="videos[activeVideoIndex]"
+      @close="toggleCommentsModal"
+    />
+    <ShareModal v-if="isShareModalOpen" @close="toggleShareModal" />
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
+
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 
-const videos = ref([
-  {
-    url: require('../assets/videos/film-1.mp4'),
-    likes: 782,
-    comments: 63,
-    shares: 7,
-    isLiked: false,
-    productName: 'Black sheet mask',
-    productPrice: 4.34,
-    productImage: require('../assets/photos/mask.jpg'),
-    commentsList: [
-      'This mask works wonders! My skin feels so soft afterward.',
-      'I love using it after a long day. It’s so refreshing!',
-      'Does it work for sensitive skin? I have very delicate skin and I’m curious.',
-      'Absolutely love this product. I use it twice a week!',
-      'Perfect for a quick spa day at home.',
-    ],
-  },
-  {
-    url: require('../assets/videos/film-2.mp4'),
-    likes: 456,
-    comments: 34,
-    shares: 15,
-    isLiked: false,
-    productName: 'Gel face cream',
-    productPrice: 18.95,
-    productImage: require('../assets/photos/cream.jpeg'),
-    commentsList: [
-      'Best cream I have used! Keeps my skin hydrated all day.',
-      'I’ve tried many creams, but this one really works for me.',
-      'Worth the price! A little goes a long way.',
-      'I love the texture of this cream, not too oily.',
-      'It’s perfect for dry skin. My face feels moisturized all day!',
-    ],
-  },
-  {
-    url: require('../assets/videos/film-3.mp4'),
-    likes: 1123,
-    comments: 89,
-    shares: 25,
-    isLiked: false,
-    productName: 'Curling iron',
-    productPrice: 79.90,
-    productImage: require('../assets/photos/iron.jpeg'),
-    commentsList: [
-      'Curls my hair perfectly! It’s so easy to use.',
-      'Doesn’t damage my hair at all. I’m in love!',
-      'Heats up really fast! Saves me so much time in the morning.',
-      'I use this curling iron almost every day. Highly recommend it!',
-      'My curls last all day thanks to this iron. Fantastic quality!',
-    ],
-  },
-  {
-    url: require('../assets/videos/film-4.mp4'),
-    likes: 324,
-    comments: 18,
-    shares: 5,
-    isLiked: false,
-    productName: 'Pinky blush',
-    productPrice: 12.65,
-    productImage: require('../assets/photos/blush.jpg'),
-    commentsList: [
-      'Beautiful color! It looks so natural on my skin.',
-      'Lasts all day and gives me a nice glow.',
-      'Blends easily and is not too powdery. Love it!',
-      'Perfect for that subtle rosy look. Matches my skin tone perfectly.',
-      'I get compliments on my blush all the time. Great product!',
-    ],
-  },
-  {
-    url: require('../assets/videos/film-5.mp4'),
-    likes: 985,
-    comments: 67,
-    shares: 12,
-    isLiked: false,
-    productName: 'Mascara High Volume',
-    productPrice: 25.40,
-    productImage: require('../assets/photos/mascara.jpg'),
-    commentsList: [
-      'Gives my lashes so much volume! No need for falsies anymore.',
-      'No clumps at all, and stays on all day.',
-      'Best mascara I’ve ever tried. My lashes are super long!',
-      'It really gives that high volume effect. My favorite!',
-      'Perfect for dramatic lashes. Great for nights out!',
-    ],
-  },
-])
-const videoRef = ref([])
-const isVideoPlaying = ref(true)
-const isCommentsModelOpen = ref(false)
-const isShareModalOpen = ref(false)
+import InteractionPanel from '@/components/InteractionPanel.vue'
+import ProductInfo from '@/components/ProductInfo.vue'
+import ShareModal from '@/components/ShareModal.vue'
+import CommentsModal from '@/components/CommentsModal.vue'
 
-const handleLike = (index) => {
-  const video = videos.value[index]
+import useVideo from '@/composables/useVideo.js'
 
-  if (video.isLiked) {
-    video.likes--
-  } else {
-    video.likes++
-  }
-  video.isLiked = !video.isLiked
-}
+const {
+  videos,
+  isCommentsModelOpen,
+  isShareModalOpen,
+  isVideoPlaying,
+  activeVideoIndex,
+  videoRef,
+  toggleCommentsModal,
+  toggleShareModal,
+  closeModals,
+  handleLike,
+  toggleVideo,
+} = useVideo()
 
 const handleSlideChange = (swiper) => {
   isVideoPlaying.value = true
+  activeVideoIndex.value = swiper.realIndex
 
   videoRef.value.forEach((videoRef, index) => {
-    if (videoRef) {
-      if (index === swiper.realIndex) {
-        videoRef.currentTime = 0
-        videoRef.play()
-      } else {
-        videoRef.pause()
-        videoRef.currentTime = 0
-      }
+    if (!videoRef) return
+
+    if (index === swiper.realIndex) {
+      videoRef.currentTime = 0
+      videoRef.play()
+    } else {
+      videoRef.pause()
+      videoRef.currentTime = 0
     }
   })
-}
-
-const toggleVideo = (index) => {
-  const video = videoRef.value[index]
-
-  if (!video || isCommentsModelOpen.value || isShareModalOpen.value) return
-
-  if (video.paused) {
-    isVideoPlaying.value = true
-    video.play()
-  } else {
-    isVideoPlaying.value = false
-    video.pause()
-  }
-}
-
-const toggleCommentsModal = () => (isCommentsModelOpen.value = !isCommentsModelOpen.value)
-
-const toggleShareModal = () => (isShareModalOpen.value = !isShareModalOpen.value)
-
-const closeModals = () => {
-  isCommentsModelOpen.value = false
-  isShareModalOpen.value = false
 }
 
 onMounted(() => (videoRef.value = videos.value.map(() => null)))
 </script>
 
 <style scoped lang="scss">
-.video-list {
-  height: calc(100vh - 4rem);
-}
-
 svg {
   filter: drop-shadow(0 0 20px #000);
 }

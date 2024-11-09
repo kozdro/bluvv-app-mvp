@@ -1,10 +1,10 @@
 <template>
-  <div v-if="device.mobile">
+  <div v-if="device.mobile" class="flex flex-col h-dvh">
     <main>
       <RouterView />
     </main>
   
-    <nav class="fixed z-[100] bottom-0 w-full h-16 bg-black flex justify-around items-center">
+    <nav class="fixed bottom-0 z-[100] w-full h-16 bg-black flex justify-around items-center">
       <RouterLink to="/" class="flex flex-col items-center text-white text-xs w-1/4">
         <svg v-if="$route.path === '/'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
           <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
@@ -58,3 +58,9 @@ import { useDevice } from 'next-vue-device-detector'
 
 const device = useDevice()
 </script>
+
+<style lang="scss">
+main {
+  height: calc(100dvh - 4rem);
+}
+</style>
