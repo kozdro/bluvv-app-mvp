@@ -7,7 +7,13 @@
     @slideChange="handleSlideChange"
   >
     <SwiperSlide v-for="(video, index) in videos" :key="index">
-      <div class="w-full h-full overflow-hidden bg-black relative" :class="{ 'opacity-70': isCommentsModelOpen }">
+      <div 
+        v-if="isCommentsModelOpen || isShareModalOpen" 
+        class="fixed inset-0 bg-black bg-opacity-50 z-[1500]" 
+        @click="closeModals">
+      </div>
+
+      <div class="w-full h-full overflow-hidden bg-black relative">
         <video
           :ref="el => videoRef[index] = el"
           :src="video.url"
@@ -33,6 +39,7 @@
           />
         </svg>
 
+        <!-- Interaction panel -->
         <div class="fixed bottom-1/3 right-2 flex flex-col items-center gap-4 z-[1000]">
           <button class="p-2 flex flex-col items-center gap-1 text-white" @click="handleLike(index)">
             <svg
@@ -45,6 +52,7 @@
             </svg>
             <span class="text-xs drop-shadow" v-text="video.likes" />
           </button>
+
           <button class="p-2 text-white flex flex-col items-center gap-1" @click="toggleCommentsModal(index)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +68,8 @@
             </svg>
             <span class="text-xs drop-shadow" v-text="video.comments" />
           </button>
-          <button class="p-2 text-white flex flex-col items-center gap-1">
+
+          <button class="p-2 text-white flex flex-col items-center gap-1" @click="toggleShareModal(index)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -78,6 +87,7 @@
         </div>
       </div>
 
+      <!-- Product info -->
       <div class="absolute top-[70%] left-0 rounded-r-[10rem] p-3 bg-[rgba(0,0,0,0.3)] z-[1000]">
         <div class="flex items-center gap-4">
           <img :src="video.productImage" class="h-16 w-16 rounded-full">
@@ -92,6 +102,7 @@
         </div>
       </div>
 
+      <!-- Comments Modal -->
       <div v-if="isCommentsModelOpen" class="fixed bottom-0 left-0 w-full bg-white h-2/3 rounded-t-lg p-4 overflow-y-auto z-[2000]">
         <div class="flex justify-between items-center mb-4 border-b pb-2">
           <h3 class="text-lg font-bold" v-text="'Comments'" />
@@ -105,7 +116,7 @@
 
         <ul class="space-y-4">
           <li
-            v-for="(comment, index) in videos[activeVideoIndex].commentsList"
+            v-for="(comment, index) in video.commentsList"
             :key="index"
             class="flex gap-3 items-start"
           >
@@ -118,6 +129,38 @@
         </ul>
 
         <button class="mt-8 w-full py-2 bg-gray-200 text-gray-700 rounded-lg font-bold" v-text="'Load More Comments'" />
+      </div>
+
+      <!-- Share Modal -->
+      <div v-if="isShareModalOpen" class="fixed bottom-0 w-full bg-white h-1/4 rounded-t-lg p-4 overflow-y-auto z-[2000]">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-bold" v-text="'Share'" />
+          <button class="text-gray-700 text-xl" @click="toggleShareModal">
+            &times;
+          </button>
+        </div>
+        <ul class="flex justify-between">
+          <li class="flex flex-col items-center">
+            <i class="fab fa-facebook-square text-3xl text-blue-600" />
+            <span class="text-sm" v-text="'Facebook'" />
+          </li>
+          <li class="flex flex-col items-center">
+            <i class="fab fa-instagram text-3xl text-pink-500" />
+            <span class="text-sm" v-text="'Instagram'" />
+          </li>
+          <li class="flex flex-col items-center">
+            <i class="fab fa-tiktok text-3xl text-black" />
+            <span class="text-sm" v-text="'TikTok'" />
+          </li>
+          <li class="flex flex-col items-center">
+            <i class="fab fa-facebook-messenger text-3xl text-blue-400" />
+            <span class="text-sm" v-text="'Messenger'" />
+          </li>
+          <li class="flex flex-col items-center">
+            <i class="fab fa-whatsapp text-3xl text-green-500" />
+            <span class="text-sm" v-text="'WhatsApp'" />
+          </li>
+        </ul>
       </div>
     </SwiperSlide>
   </Swiper>
@@ -218,8 +261,7 @@ const videos = ref([
 const videoRef = ref([])
 const isVideoPlaying = ref(true)
 const isCommentsModelOpen = ref(false)
-const activeVideoIndex = ref(0)
-
+const isShareModalOpen = ref(false)
 
 const handleLike = (index) => {
   const video = videos.value[index]
@@ -251,7 +293,7 @@ const handleSlideChange = (swiper) => {
 const toggleVideo = (index) => {
   const video = videoRef.value[index]
 
-  if (!video) return
+  if (!video || isCommentsModelOpen.value || isShareModalOpen.value) return
 
   if (video.paused) {
     isVideoPlaying.value = true
@@ -262,18 +304,16 @@ const toggleVideo = (index) => {
   }
 }
 
-const toggleCommentsModal = (index) => {
-  if (index !== undefined) {
-    activeVideoIndex.value = index
-  }
+const toggleCommentsModal = () => (isCommentsModelOpen.value = !isCommentsModelOpen.value)
 
-  isCommentsModelOpen.value = !isCommentsModelOpen.value
+const toggleShareModal = () => (isShareModalOpen.value = !isShareModalOpen.value)
+
+const closeModals = () => {
+  isCommentsModelOpen.value = false
+  isShareModalOpen.value = false
 }
 
-
-onMounted(() => {
-  videoRef.value = videos.value.map(() => null)
-})
+onMounted(() => (videoRef.value = videos.value.map(() => null)))
 </script>
 
 <style scoped lang="scss">
