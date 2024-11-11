@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-0 w-full bg-white h-2/3 rounded-t-lg p-4 z-[2000] overflow-hidden flex flex-col">
+  <div class="fixed bottom-0 w-full bg-white h-2/3 rounded-t-lg p-4 z-50 overflow-hidden flex flex-col">
     <div class="flex justify-between items-center mb-4 border-b pb-2">
       <h3 class="text-lg font-bold" v-text="'Comments'" />
       <button
