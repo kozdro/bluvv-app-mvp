@@ -1,11 +1,18 @@
 <template>
-  <div v-if="device.mobile" class="flex flex-col h-dvh">
+  <div v-if="showCameraView" class="w-full h-full flex items-center justify-center">
+    <video
+      id="camera"
+      class="w-full h-full object-cover"
+      autoplay
+    />
+  </div>
+  <div v-else-if="device.mobile" class="flex flex-col h-dvh">
     <main>
       <RouterView />
     </main>
   
     <nav class="fixed bottom-0 z-40 w-full h-16 bg-black flex justify-around items-center">
-      <RouterLink to="/" class="flex flex-col items-center text-white text-xs w-1/4">
+      <RouterLink to="/" class="flex flex-col items-center text-white text-xs w-1/5">
         <svg v-if="$route.path === '/'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
           <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
           <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
@@ -16,7 +23,7 @@
         Home
       </RouterLink>
   
-      <RouterLink to="/shop" class="flex flex-col items-center text-white text-xs w-1/4">
+      <RouterLink to="/shop" class="flex flex-col items-center text-white text-xs w-1/5">
         <svg v-if="$route.path !== '/shop'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
         </svg>
@@ -26,8 +33,16 @@
         </svg>
         Explore
       </RouterLink>
+
+      <div class="w-1/5 flex items-center justify-center">
+        <button class="flex items-center justify-center text-white w-3/4 bg-gradient-to-r from-pink-300 to-pink-500 p-3 rounded-lg" @click="startCamera">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        </button>
+      </div>
   
-      <RouterLink to="/cart" class="flex flex-col items-center text-white text-xs w-1/4 relative">
+      <RouterLink to="/cart" class="flex flex-col items-center text-white text-xs w-1/5 relative">
         <span
           v-if="cartItems?.length"
           class="absolute -top-2 left-[55%] rounded-full h-4 p-1 flex items-center justify-center bg-green-500 text-center text-white text-xs"
@@ -42,7 +57,7 @@
         Cart
       </RouterLink>
   
-      <RouterLink to="/profile" class="flex flex-col items-center text-white text-xs w-1/4">
+      <RouterLink to="/profile" class="flex flex-col items-center text-white text-xs w-1/5">
         <svg v-if="$route.path !== '/profile'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
         </svg>
@@ -59,12 +74,30 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useDevice } from 'next-vue-device-detector'
 
 import useCart from '@/composables/useCart.js'
 
 const device = useDevice()
 const { cartItems } = useCart()
+
+const showCameraView = ref(false)
+
+const startCamera = () => {
+  showCameraView.value = true
+
+  const video = document.getElementById('camera')
+
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        video.srcObject = stream
+        video.play()
+      })
+      .catch(error => console.error('Camera access denied:', error))
+  }
+}
 </script>
 
 <style lang="scss">

@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import CartItemCard from '@/components/CartItemCard.vue'
+import CartItemCard from '@/components/Cart/CartItemCard.vue'
 
 import useCart from '@/composables/useCart.js'
 
