@@ -1,10 +1,15 @@
 <template>
   <div v-if="showCameraView" class="w-full h-full flex items-center justify-center">
     <video
-      id="camera"
+      ref="cameraRef"
       class="w-full h-full object-cover"
       autoplay
     />
+    <button class="absolute top-4 right-4 text-white p-2 rounded" @click="showCameraView = false">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6">
+        <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+      </svg>
+    </button>
   </div>
   <div v-else-if="device.mobile" class="flex flex-col h-dvh">
     <main>
@@ -83,19 +88,18 @@ const device = useDevice()
 const { cartItems } = useCart()
 
 const showCameraView = ref(false)
+const cameraRef = ref()
 
 const startCamera = () => {
   showCameraView.value = true
 
-  const video = document.getElementById('camera')
-
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ video: true })
       .then((stream) => {
-        video.srcObject = stream
-        video.play()
+        cameraRef.value.srcObject = stream
+        cameraRef.value.play()
       })
-      .catch(error => console.error('Camera access denied:', error))
+      .catch(error => console.error('Camera access denied: ', error))
   }
 }
 </script>
