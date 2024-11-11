@@ -1,17 +1,5 @@
 <template>
-  <div v-if="showCameraView" class="w-full h-full flex items-center justify-center">
-    <video
-      ref="cameraRef"
-      class="w-full h-full object-cover"
-      autoplay
-    />
-    <button class="absolute top-4 right-4 text-white p-2 rounded" @click="showCameraView = false">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6">
-        <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-      </svg>
-    </button>
-  </div>
-  <div v-else-if="device.mobile" class="flex flex-col h-dvh">
+  <div v-if="device.mobile" class="flex flex-col h-dvh">
     <main>
       <RouterView />
     </main>
@@ -40,11 +28,17 @@
       </RouterLink>
 
       <div class="w-1/5 flex items-center justify-center">
-        <button class="flex items-center justify-center text-white w-3/4 bg-gradient-to-r from-pink-300 to-pink-500 p-3 rounded-lg" @click="startCamera">
+        <label class="flex items-center justify-center text-white w-3/4 bg-gradient-to-r from-pink-300 to-pink-500 p-3 rounded-lg relative">
+          <input
+            type="file"
+            accept="video/*"
+            capture
+            class="hidden"
+          >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
-        </button>
+        </label>
       </div>
   
       <RouterLink to="/cart" class="flex flex-col items-center text-white text-xs w-1/5 relative">
@@ -73,35 +67,19 @@
       </RouterLink>
     </nav>
   </div>
+
   <div v-else class="h-screen w-full flex items-center justify-center">
     <h1 class="text-3xl" v-text="'Please use mobile device.'" />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { useDevice } from 'next-vue-device-detector'
 
 import useCart from '@/composables/useCart.js'
 
 const device = useDevice()
 const { cartItems } = useCart()
-
-const showCameraView = ref(false)
-const cameraRef = ref()
-
-const startCamera = () => {
-  showCameraView.value = true
-
-  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then((stream) => {
-        cameraRef.value.srcObject = stream
-        cameraRef.value.play()
-      })
-      .catch(error => console.error('Camera access denied: ', error))
-  }
-}
 </script>
 
 <style lang="scss">
