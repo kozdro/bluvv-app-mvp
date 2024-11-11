@@ -10,11 +10,9 @@
     </div>
     <div v-else class="text-center mt-20">
       <h3 class="text-xl font-semibold text-gray-600" v-text="'Your cart is empty'" />
-      <RouterLink
-        to="/"
-        class="text-blue-500 hover:underline mt-4 block"
-        v-text="'Continue Shopping'"
-      />
+      <RouterLink to="/" class="text-blue-500 hover:underline mt-4 block">
+        <button class="bg-black hover:bg-slate-900 text-white p-3 rounded-lg font-bold w-full" v-text="'Continue shopping'" />
+      </RouterLink>
     </div>
     <div v-if="cartItems.length" class="mt-8">
       <div class="flex justify-between items-center text-lg font-bold mb-4">
