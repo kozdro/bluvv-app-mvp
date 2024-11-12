@@ -328,7 +328,7 @@ const toggleVideo = (index) => {
 onMounted(() => {
   setTimeout(() => {
     loading.value = false
-  }, 1000)
+  }, 1500)
 
   videoRef.value = videos.value.map(() => null)
 })
