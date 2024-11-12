@@ -138,6 +138,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
@@ -149,6 +150,8 @@ import CommentsModal from '@/components/Modals/CommentsModal.vue'
 
 // import useVideo from '@/composables/useVideo.js'
 import useCart from '@/composables/useCart.js'
+
+import { isNavigatingWithinApp } from '@/router.js'
 
 // const {
 //   videos,
@@ -163,6 +166,7 @@ import useCart from '@/composables/useCart.js'
 //   handleLike,
 //   toggleVideo,
 // } = useVideo()
+const { router } = useRouter()
 const { addToCart } = useCart()
 
 const loading = ref(true)
@@ -326,9 +330,13 @@ const toggleVideo = (index) => {
 }
 
 onMounted(() => {
-  setTimeout(() => {
+  if (isNavigatingWithinApp) {
     loading.value = false
-  }, 1500)
+  } else {
+    setTimeout(() => {
+      loading.value = false
+    }, 1500)
+  }
 
   videoRef.value = videos.value.map(() => null)
 })

@@ -40,4 +40,17 @@ const router = createRouter({
   routes,
 })
 
+let isNavigatingWithinApp = false
+
+router.beforeEach((_, from, next) => {
+  if (from.name) {
+    isNavigatingWithinApp = true
+  } else {
+    isNavigatingWithinApp = false
+  }
+
+  next()
+})
+
+export { isNavigatingWithinApp }
 export default router
