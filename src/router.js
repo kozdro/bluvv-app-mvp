@@ -2,9 +2,11 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import HomeView from '@/views/HomeView.vue'
 import ShopView from '@/views/ShopView.vue'
-import ProductDetailPage from '@/views/ProductView.vue'
+import ProductView from '@/views/ProductView.vue'
 import CartView from '@/views/CartView.vue'
+import CheckoutView from '@/views/CheckoutView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import ConfirmationView from '@/views/ConfirmationView.vue'
 
 const routes = [
   {
@@ -23,6 +25,11 @@ const routes = [
     component: CartView,
   },
   {
+    path: '/checkout',
+    name: 'checkout',
+    component: CheckoutView,
+  },
+  {
     path: '/profile',
     name: 'profile',
     component: ProfileView,
@@ -30,8 +37,13 @@ const routes = [
   {
     path: '/product/:productName',
     name: 'product-detail',
-    component: ProductDetailPage,
+    component: ProductView,
     props: true,
+  },
+  {
+    path: '/confirmation',
+    name: 'confirmation',
+    component: ConfirmationView,
   },
 ]
 
