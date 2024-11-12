@@ -138,7 +138,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
@@ -166,7 +165,6 @@ import { isNavigatingWithinApp } from '@/router.js'
 //   handleLike,
 //   toggleVideo,
 // } = useVideo()
-const { router } = useRouter()
 const { addToCart } = useCart()
 
 const loading = ref(true)
