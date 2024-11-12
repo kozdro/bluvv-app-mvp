@@ -104,7 +104,7 @@
               </RouterLink>
               <button
                 type="button"
-                class="bg-green-500 hover:bg-green-600 rounded-full w-14 h-14 text-xs flex items-center justify-center text-center text-white font-bold"
+                class="bg-pink-500 hover:bg-pink-300 rounded-full w-14 h-14 text-xs flex items-center justify-center text-center text-white font-bold"
                 v-text="'Add to Cart'"
                 @click="addToCart(video.product)"
               />

@@ -39,7 +39,7 @@
     <RouterLink to="/cart" class="flex flex-col items-center text-white text-xs w-1/5 relative">
       <span
         v-if="cartItems?.length"
-        class="absolute -top-2 left-[55%] rounded-full h-4 p-1 flex items-center justify-center bg-green-500 text-center text-white text-xs"
+        class="absolute -top-2 left-[55%] rounded-full h-4 p-1 flex items-center justify-center bg-pink-500 text-center text-white text-xs"
         v-text="cartItems.length"
       />
       <svg v-if="$route.path !== '/cart'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

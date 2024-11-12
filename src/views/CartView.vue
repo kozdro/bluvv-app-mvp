@@ -19,7 +19,7 @@
         Total:
         <span class="text-xl" v-text="`$${totalPrice.toFixed(2)}`" />
       </div>
-      <button class="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 transition" v-text="'Checkout'" />
+      <button class="w-full bg-pink-500 text-white py-3 rounded-lg font-bold hover:bg-pink-300 transition" v-text="'Checkout'" />
     </div>
   </div>
 </template>

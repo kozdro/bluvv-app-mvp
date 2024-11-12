@@ -23,7 +23,7 @@
           <p class="text-gray-600" v-text="product.description" />
         </div>
         <button
-          class="mt-6 w-full bg-green-500 text-white py-2 rounded-lg font-bold hover:bg-green-600 transition"
+          class="mt-6 w-full bg-pink-500 text-white py-2 rounded-lg font-bold hover:bg-pink-300 transition"
           @click="addToCart(product)"
           v-text="'Add to Cart'"
         />
