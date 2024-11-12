@@ -1,14 +1,38 @@
-import { createWebHashHistory, createRouter } from 'vue-router'
-import HomeView from './views/HomeView.vue'
-import ShopView from './views/ShopView.vue'
-import CartView from './views/CartView.vue'
-import ProfileView from './views/ProfileView.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+
+import HomeView from '@/views/HomeView.vue'
+import ShopView from '@/views/ShopView.vue'
+import ProductDetailPage from '@/views/ProductView.vue'
+import CartView from '@/views/CartView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 const routes = [
-  { path: '/', component: HomeView },
-  { path: '/shop', component: ShopView },
-  { path: '/cart', component: CartView },
-  { path: '/profile', component: ProfileView },
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
+  },
+  {
+    path: '/shop',
+    name: 'shop',
+    component: ShopView,
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: CartView,
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView,
+  },
+  {
+    path: '/product/:productName',
+    name: 'product-detail',
+    component: ProductDetailPage,
+    props: true,
+  },
 ]
 
 const router = createRouter({

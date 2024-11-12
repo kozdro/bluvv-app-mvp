@@ -1,7 +1,5 @@
 <template>
-  <template
-    v-if="device.mobile"
-  >
+  <template v-if="device.mobile">
     <main class="mb-16 box-border">
       <RouterView />
     </main>

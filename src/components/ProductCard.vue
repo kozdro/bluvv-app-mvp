@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center bg-white p-4 rounded-lg shadow-md">
+  <div class="flex flex-col items-center bg-white p-4 rounded-lg shadow-md cursor-pointer" @click="goToProductDetail">
     <img
       :src="product.image"
       :alt="`product ${product.name} image`"
@@ -11,6 +11,7 @@
       <button
         class="w-full bg-green-500 text-white py-2 rounded-lg font-bold hover:bg-green-600 transition"
         v-text="'Add to Cart'"
+        @click="addToCart(product)"
       />
     </div>
   </div>
@@ -18,8 +19,16 @@
 
 <script setup>
 import { defineProps } from 'vue'
+import { useRouter } from 'vue-router'
 
-defineProps({
-  product: Object
+import useCart from '@/composables/useCart.js'
+
+const props = defineProps({
+  product: Object,
 })
+
+const router = useRouter()
+const { addToCart } = useCart()
+
+const goToProductDetail = () => router.push(`/product/${props.product.name.toLowerCase().replace(/\s+/g, '-')}`)
 </script>

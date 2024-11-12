@@ -91,11 +91,17 @@
 
           <div class="absolute bottom-6 rounded-r-[10rem] p-3 bg-[rgba(0,0,0,0.3)] z-30">
             <div class="flex items-center gap-4">
-              <img :src="video.product.image" class="h-16 w-16 rounded-full">
-              <div class="text-white flex flex-col w-28">
-                <span class="text-lg font-bold" v-text="`$${video.product.price.toFixed(2)}`" />
-                {{ video.product.name }}
-              </div>
+              <RouterLink :to="`/product/${video.product.name.toLowerCase().replace(/\s+/g, '-')}`" class="flex items-center gap-4">
+                <img
+                  :src="video.product.image"
+                  :alt="`product ${video.product.name} image`"
+                  class="h-16 w-16 rounded-full"
+                >
+                <div class="text-white flex flex-col w-28">
+                  <span class="text-lg font-bold" v-text="`$${video.product.price.toFixed(2)}`" />
+                  {{ video.product.name }}
+                </div>
+              </RouterLink>
               <button
                 type="button"
                 class="bg-green-500 hover:bg-green-600 rounded-full w-14 h-14 text-xs flex items-center justify-center text-center text-white font-bold"

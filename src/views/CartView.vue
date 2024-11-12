@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-full p-4 flex flex-col">
-    <h1 class="text-2xl font-bold mb-6" v-text="'Cart'" />
+  <div class="w-full h-full p-4 flex flex-col overflow-y-auto">
+    <h1 class="text-3xl font-bold mb-6" v-text="'Cart'" />
     <div v-if="cartItems.length" class="space-y-4">
       <CartItemCard
         v-for="(item, index) in cartItems"
