@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full bg-black relative flex flex-col items-center">
+  <div v-if="!loading" class="w-full h-full bg-black relative flex flex-col items-center">
     <div
       v-if="isCommentsModelOpen || isShareModalOpen"
       class="fixed inset-0 bg-black bg-opacity-50 z-40"
@@ -130,6 +130,10 @@
     />
     <ShareModal v-if="isShareModalOpen" @close="toggleShareModal" />
   </div>
+
+  <div v-else class="w-full h-full flex items-center justify-center bg-white">
+    <img :src="require('../assets/logo.png')">
+  </div>
 </template>
 
 <script setup>
@@ -161,6 +165,7 @@ import useCart from '@/composables/useCart.js'
 // } = useVideo()
 const { addToCart } = useCart()
 
+const loading = ref(true)
 const videos = ref([
   {
     url: require('../assets/videos/film-1.mp4'),
@@ -320,7 +325,13 @@ const toggleVideo = (index) => {
   }
 }
 
-onMounted(() => (videoRef.value = videos.value.map(() => null)))
+onMounted(() => {
+  setTimeout(() => {
+    loading.value = false
+  }, 1000)
+
+  videoRef.value = videos.value.map(() => null)
+})
 </script>
 
 <style scoped lang="scss">

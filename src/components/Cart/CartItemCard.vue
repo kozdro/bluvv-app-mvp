@@ -29,7 +29,7 @@ import { defineProps } from 'vue'
 import useCart from '@/composables/useCart.js'
 
 defineProps({
-  item: Object
+  item: Object,
 })
 
 const { removeFromCart } = useCart()

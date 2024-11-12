@@ -1,7 +1,21 @@
 <template>
-  <div class="w-full h-full flex flex-col items-center p-4 overflow-y-auto">
+  <div class="w-full h-full flex flex-col p-4 overflow-y-auto">
+    <RouterLink
+      to=""
+      class="text-black mb-4 flex items-center gap-2 text-sm"
+      @click="$router.back()"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+        <path fill-rule="evenodd" d="M14 8a.75.75 0 0 1-.75.75H4.56l3.22 3.22a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 1.06L4.56 7.25h8.69A.75.75 0 0 1 14 8Z" clip-rule="evenodd" />
+      </svg>
+      back
+    </RouterLink>
     <div class="flex flex-col md:flex-row gap-6">
-      <img :src="product.image" alt="Product Image" class="w-full md:w-1/2 rounded-lg object-cover" />
+      <img
+        :src="product.image"
+        :alt="`product ${product.name} image`"
+        class="w-full md:w-1/2 rounded-lg object-cover transition scale-105"
+      >
       <div class="flex-1 flex flex-col justify-between">
         <div>
           <h2 class="text-3xl font-bold mb-4" v-text="product.name" />
@@ -39,21 +53,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 import useCart from '@/composables/useCart.js'
 
 const route = useRoute()
 const { addToCart } = useCart()
-
-const product = ref({
-  name: '',
-  price: 0,
-  image: '',
-  description: '',
-  reviews: []
-})
 
 const productsData = {
   'pinky-blush': {
@@ -64,7 +70,6 @@ const productsData = {
     reviews: [
       { user: 'User1', date: '2024-11-10', comment: 'Great product! Gives a natural look.' },
       { user: 'User2', date: '2024-11-08', comment: 'Loved the color, very easy to apply.' },
-      { user: 'User3', date: '2024-11-05', comment: 'Perfect for everyday use, very subtle.' },
     ],
   },
   'gel-face-cream': {
@@ -73,8 +78,8 @@ const productsData = {
     image: require('../assets/photos/cream.jpeg'),
     description: 'A refreshing gel cream that hydrates and nourishes your skin.',
     reviews: [
-      { user: 'UserA', date: '2024-11-12', comment: 'Very hydrating and light on the skin.' },
-      { user: 'UserB', date: '2024-11-09', comment: 'Perfect for my dry skin, love it!' },
+      { user: 'User3', date: '2024-11-12', comment: 'Very hydrating and light on the skin.' },
+      { user: 'User4', date: '2024-11-09', comment: 'Perfect for my dry skin, love it!' },
     ],
   },
   'curling-iron': {
@@ -93,8 +98,8 @@ const productsData = {
     image: require('../assets/photos/mask.jpg'),
     description: 'A soothing black sheet mask that helps detoxify and refresh your skin.',
     reviews: [
-      { user: 'UserC', date: '2024-11-13', comment: 'Very relaxing and left my skin feeling great.' },
-      { user: 'UserD', date: '2024-11-10', comment: 'Easy to use, and my skin felt smoother after.' },
+      { user: 'User5', date: '2024-11-13', comment: 'Very relaxing and left my skin feeling great.' },
+      { user: 'User6', date: '2024-11-10', comment: 'Easy to use, and my skin felt smoother after.' },
     ],
   },
   'mascara-high-volume': {
@@ -103,27 +108,11 @@ const productsData = {
     image: require('../assets/photos/mascara.jpg'),
     description: 'A high-volume mascara that gives your lashes a dramatic look.',
     reviews: [
-      { user: 'UserE', date: '2024-11-15', comment: 'Gives great volume without clumping.' },
-      { user: 'UserF', date: '2024-11-12', comment: 'The best mascara I have tried in a long time!' },
+      { user: 'UserA', date: '2024-11-15', comment: 'Gives great volume without clumping.' },
+      { user: 'UserB', date: '2024-11-12', comment: 'The best mascara I have tried in a long time!' },
     ],
   },
 }
 
-onMounted(() => {
-  const productName = route.params.productName
-
-  if (productName && productsData[productName]) {
-    product.value = productsData[productName]
-  }
-})
+const product = computed(() => productsData[route.params.productName])
 </script>
-
-<style scoped>
-img {
-  transition: transform 0.3s ease;
-}
-
-img:hover {
-  transform: scale(1.05);
-}
-</style>
