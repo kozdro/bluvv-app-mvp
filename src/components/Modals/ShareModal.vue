@@ -24,7 +24,7 @@
         <span class="text-sm" v-text="'Messenger'" />
       </li>
       <li class="flex flex-col items-center">
-        <i class="fab fa-whatsapp text-3xl text-pink-500" />
+        <i class="fab fa-whatsapp text-3xl text-green-500" />
         <span class="text-sm" v-text="'WhatsApp'" />
       </li>
     </ul>
