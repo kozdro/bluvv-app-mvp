@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-const isAuthenticated = ref()
+const isAuthenticated = ref(false)
 
 export default () => {
   const email = ref('')
