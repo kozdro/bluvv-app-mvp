@@ -57,7 +57,7 @@
 
       <button
         type="submit"
-        class="w-full bg-pink-500 text-white py-3 rounded-lg font-bold hover:bg-pink-300 transition"
+        class="w-full bg-pink-500 text-white py-3 rounded-lg font-bold hover:bg-pink-300 active:bg-pink-300 transition"
         v-text="'Place Order'"
       />
     </form>

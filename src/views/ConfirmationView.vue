@@ -39,7 +39,7 @@
     </div>
 
     <RouterLink to="/">
-      <button class="w-full bg-pink-500 text-white py-3 rounded-lg font-bold hover:bg-pink-300 transition" v-text="'Back to Home'" />
+      <button class="w-full bg-pink-500 text-white py-3 rounded-lg font-bold hover:bg-pink-300 active:bg-pink-300 transition" v-text="'Back to Home'" />
     </RouterLink>
   </div>
 </template>

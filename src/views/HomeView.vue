@@ -94,8 +94,8 @@
           </button>
         </div>
 
-        <div class="absolute bottom-6 rounded-r-[10rem] p-3 bg-black bg-opacity-30 z-30">
-          <div class="flex items-center gap-4">
+        <div class="absolute bottom-6 rounded-r-[10rem] p-3 bg-black bg-opacity-30 z-30 h-[100px]">
+          <div class="flex h-full items-center justify-center gap-4">
             <RouterLink :to="`/product/${video.product.name.toLowerCase().replace(/\s+/g, '-')}`" class="flex items-center gap-4">
               <img
                 :src="video.product.image"
@@ -109,7 +109,7 @@
             </RouterLink>
             <button
               type="button"
-              class="bg-pink-500 hover:bg-pink-300 rounded-full w-14 h-14 text-xs flex items-center justify-center text-center text-white font-bold"
+              class="bg-pink-500 hover:bg-pink-300 active:bg-pink-300 rounded-full w-14 h-14 text-xs flex items-center justify-center text-center text-white font-bold"
               v-text="'Add to Cart'"
               @click="addToCart(video.product)"
             />
@@ -162,7 +162,7 @@ import { isNavigatingWithinApp } from '@/router.js'
 const router = useRouter()
 const route = useRoute()
 const {
-  // videos,
+  videos,
   isCommentsModelOpen,
   isShareModalOpen,
   isVideoPlaying,
@@ -172,112 +172,15 @@ const {
   toggleCommentsModal,
   toggleShareModal,
   closeModals,
-  // handleLike,
+  handleLike,
   // toggleVideo,
 } = useVideo()
 const { addToCart } = useCart()
 const { totalEarnings } = useUser()
 
 const loading = ref(true)
-const videos = ref([
-  {
-    url: require('../assets/videos/film-1.mp4'),
-    likes: 782,
-    comments: 63,
-    shares: 7,
-    isLiked: false,
-    product: {
-      name: 'Black sheet mask',
-      price: 4.34,
-      image: require('../assets/photos/mask.jpg'),
-    },
-    commentsList: [
-      'This mask works wonders! My skin feels so soft afterward.',
-      'I love using it after a long day. It’s so refreshing!',
-      'Does it work for sensitive skin? I have very delicate skin and I’m curious.',
-      'Absolutely love this product. I use it twice a week!',
-      'Perfect for a quick spa day at home.',
-    ],
-  },
-  {
-    url: require('../assets/videos/film-2.mp4'),
-    likes: 456,
-    comments: 34,
-    shares: 15,
-    isLiked: false,
-    product: {
-      name: 'Gel face cream',
-      price: 18.95,
-      image: require('../assets/photos/cream.jpeg'),
-    },
-    commentsList: [
-      'Best cream I have used! Keeps my skin hydrated all day.',
-      'I’ve tried many creams, but this one really works for me.',
-      'Worth the price! A little goes a long way.',
-      'I love the texture of this cream, not too oily.',
-      'It’s perfect for dry skin. My face feels moisturized all day!',
-    ],
-  },
-  {
-    url: require('../assets/videos/film-3.mp4'),
-    likes: 1123,
-    comments: 89,
-    shares: 25,
-    isLiked: false,
-    product: {
-      name: 'Curling iron',
-      price: 79.90,
-      image: require('../assets/photos/iron.jpeg'),
-    },
-    commentsList: [
-      'Curls my hair perfectly! It’s so easy to use.',
-      'Doesn’t damage my hair at all. I’m in love!',
-      'Heats up really fast! Saves me so much time in the morning.',
-      'I use this curling iron almost every day. Highly recommend it!',
-      'My curls last all day thanks to this iron. Fantastic quality!',
-    ],
-  },
-  {
-    url: require('../assets/videos/film-4.mp4'),
-    likes: 324,
-    comments: 18,
-    shares: 5,
-    isLiked: false,
-    product: {
-      name: 'Pinky blush',
-      price: 12.65,
-      image: require('../assets/photos/blush.jpg'),
-    },
-    commentsList: [
-      'Beautiful color! It looks so natural on my skin.',
-      'Lasts all day and gives me a nice glow.',
-      'Blends easily and is not too powdery. Love it!',
-      'Perfect for that subtle rosy look. Matches my skin tone perfectly.',
-      'I get compliments on my blush all the time. Great product!',
-    ],
-  },
-  {
-    url: require('../assets/videos/film-5.mp4'),
-    likes: 985,
-    comments: 67,
-    shares: 12,
-    isLiked: false,
-    product: {
-      name: 'Mascara High Volume',
-      price: 25.40,
-      image: require('../assets/photos/mascara.jpg'),
-    },
-    commentsList: [
-      'Gives my lashes so much volume! No need for falsies anymore.',
-      'No clumps at all, and stays on all day.',
-      'Best mascara I’ve ever tried. My lashes are super long!',
-      'It really gives that high volume effect. My favorite!',
-      'Perfect for dramatic lashes. Great for nights out!',
-    ],
-  },
-])
 const videoRef = ref([])
-const earningsPerVideo = ref(videos.value.map(() => 0))
+const earningsPerVideo = ref(videos.map(() => 0))
 let earningsTimeout
 
 const handleSlideChange = (swiper) => {
@@ -319,18 +222,6 @@ const stopEarningsTimer = () => {
   earningsTimeout = null
 }
 
-const handleLike = (index) => {
-  const video = videos.value[index]
-
-  if (video.isLiked) {
-    video.likes--
-  } else {
-    video.likes++
-  }
-
-  video.isLiked = !video.isLiked
-}
-
 const toggleVideo = (index) => {
   const video = videoRef.value[index]
 
@@ -351,10 +242,10 @@ onMounted(() => {
   } else {
     setTimeout(() => {
       loading.value = false
-    }, 1500)
+    }, 2000)
   }
 
-  videoRef.value = videos.value.map(() => null)
+  videoRef.value = videos.map(() => null)
 })
 
 onBeforeUnmount(stopEarningsTimer)

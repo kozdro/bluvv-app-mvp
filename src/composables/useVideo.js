@@ -1,15 +1,17 @@
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
-const videos = ref([
+const videos = reactive([
   {
     url: require('../assets/videos/film-1.mp4'),
     likes: 782,
     comments: 63,
     shares: 7,
     isLiked: false,
-    productName: 'Black sheet mask',
-    productPrice: 4.34,
-    productImage: require('../assets/photos/mask.jpg'),
+    product: {
+      name: 'Black sheet mask',
+      price: 4.34,
+      image: require('../assets/photos/mask.jpg'),
+    },
     commentsList: [
       'This mask works wonders! My skin feels so soft afterward.',
       'I love using it after a long day. It’s so refreshing!',
@@ -24,9 +26,11 @@ const videos = ref([
     comments: 34,
     shares: 15,
     isLiked: false,
-    productName: 'Gel face cream',
-    productPrice: 18.95,
-    productImage: require('../assets/photos/cream.jpeg'),
+    product: {
+      name: 'Gel face cream',
+      price: 18.95,
+      image: require('../assets/photos/cream.jpeg'),
+    },
     commentsList: [
       'Best cream I have used! Keeps my skin hydrated all day.',
       'I’ve tried many creams, but this one really works for me.',
@@ -41,9 +45,11 @@ const videos = ref([
     comments: 89,
     shares: 25,
     isLiked: false,
-    productName: 'Curling iron',
-    productPrice: 79.90,
-    productImage: require('../assets/photos/iron.jpeg'),
+    product: {
+      name: 'Curling iron',
+      price: 79.90,
+      image: require('../assets/photos/iron.jpeg'),
+    },
     commentsList: [
       'Curls my hair perfectly! It’s so easy to use.',
       'Doesn’t damage my hair at all. I’m in love!',
@@ -58,9 +64,11 @@ const videos = ref([
     comments: 18,
     shares: 5,
     isLiked: false,
-    productName: 'Pinky blush',
-    productPrice: 12.65,
-    productImage: require('../assets/photos/blush.jpg'),
+    product: {
+      name: 'Pinky blush',
+      price: 12.65,
+      image: require('../assets/photos/blush.jpg'),
+    },
     commentsList: [
       'Beautiful color! It looks so natural on my skin.',
       'Lasts all day and gives me a nice glow.',
@@ -75,9 +83,11 @@ const videos = ref([
     comments: 67,
     shares: 12,
     isLiked: false,
-    productName: 'Mascara High Volume',
-    productPrice: 25.40,
-    productImage: require('../assets/photos/mascara.jpg'),
+    product: {
+      name: 'Mascara High Volume',
+      price: 25.40,
+      image: require('../assets/photos/mascara.jpg'),
+    },
     commentsList: [
       'Gives my lashes so much volume! No need for falsies anymore.',
       'No clumps at all, and stays on all day.',
@@ -87,6 +97,7 @@ const videos = ref([
     ],
   },
 ])
+
 const videoRef = ref([])
 const activeVideoIndex = ref(0)
 const isCommentsModelOpen = ref(false)
@@ -109,7 +120,7 @@ export default () => {
   }
 
   const handleLike = (index) => {
-    const video = videos.value[index]
+    const video = videos[index]
   
     if (video.isLiked) {
       video.likes--

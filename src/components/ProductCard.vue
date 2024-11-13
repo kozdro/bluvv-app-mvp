@@ -10,7 +10,7 @@
       <p class="text-gray-500 mb-4 mt-auto" v-text="`$${product.price.toFixed(2)}`" />
     </RouterLink>
     <button
-      class="w-full bg-pink-500 text-white py-2 rounded-lg font-bold hover:bg-pink-300 transition mt-auto"
+      class="w-full bg-pink-500 text-white py-2 rounded-lg font-bold hover:bg-pink-300 active:bg-pink-300 transition mt-auto"
       v-text="'Add to Cart'"
       @click="addToCart(product)"
     />

@@ -54,7 +54,7 @@
 
       <button
         type="submit"
-        class="w-full bg-pink-500 text-white py-3 rounded-lg font-bold hover:bg-pink-300 transition"
+        class="w-full bg-pink-500 text-white py-3 rounded-lg font-bold hover:bg-pink-300 active:bg-pink-300 transition"
         v-text="'Login'"
       />
 
@@ -99,7 +99,7 @@
         </ul>
       </div>
       <button
-        class="bg-black hover:bg-slate-900 text-white p-3 rounded-lg font-bold w-full transition mt-auto"
+        class="bg-black hover:bg-slate-900 active:bg-slate-900 text-white p-3 rounded-lg font-bold w-full transition mt-auto"
         v-text="'Logout'"
         @click="logout"
       />

@@ -13,7 +13,7 @@
     </RouterLink>
     <button
       type="button"
-      class="text-red-500 hover:text-red-700 p-2"
+      class="text-red-500 hover:text-red-700 active:text-red-700 p-2"
       @click="removeFromCart(item)"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6">
