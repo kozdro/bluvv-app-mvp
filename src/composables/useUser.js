@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 
 const isAuthenticated = ref(false)
+const totalEarnings = ref(0)
 
 export default () => {
   const email = ref('')
@@ -24,6 +25,7 @@ export default () => {
 
   return {
     isAuthenticated,
+    totalEarnings,
     email,
     password,
     errorMessage,

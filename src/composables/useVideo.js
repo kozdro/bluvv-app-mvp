@@ -92,6 +92,7 @@ const activeVideoIndex = ref(0)
 const isCommentsModelOpen = ref(false)
 const isShareModalOpen = ref(false)
 const isVideoPlaying = ref(true)
+const watchedVideos = ref(new Set())
 
 export default () => {
   const toggleCommentsModal = () => {
@@ -140,6 +141,7 @@ export default () => {
     isVideoPlaying,
     activeVideoIndex,
     videoRef,
+    watchedVideos,
     toggleCommentsModal,
     toggleShareModal,
     closeModals,

@@ -73,7 +73,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
             </svg>
             <div>
-              <strong v-text="'My Addresses:'"></strong>
+              <strong v-text="'My Addresses:'" />
               <p class="text-gray-700">Manage your shipping and billing addresses.</p>
             </div>
           </li>
@@ -83,7 +83,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
             </svg>
             <div>
-              <strong v-text="'My Orders:'"></strong>
+              <strong v-text="'My Orders:'" />
               <p class="text-gray-700">View your past orders and track your current orders.</p>
             </div>
           </li>
@@ -92,7 +92,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <div>
-              <strong v-text="'My Obtained Points:'"></strong>
+              <strong v-text="`My Obtained Points: ${totalEarnings.toFixed(2)}`" />
               <p class="text-gray-700">Check your loyalty points and rewards.</p>
             </div>
           </li>
@@ -112,7 +112,15 @@ import { ref } from 'vue'
 
 import useUser from '@/composables/useUser.js'
 
-const { isAuthenticated, email, password, errorMessage, login, logout } = useUser()
+const {
+  isAuthenticated,
+  totalEarnings,
+  email,
+  password,
+  errorMessage,
+  login,
+  logout,
+} = useUser()
 
 const isPasswordVisible = ref(false)
 
