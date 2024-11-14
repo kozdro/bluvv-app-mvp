@@ -57,11 +57,10 @@ h4 {
 button {
  &.primary,
  &.secondary {
-  background-position: center;
-  transition: background 0.8s;
+  transition: all .2s ease-in-out;
   border: none;
   border-radius: 8px;
-  padding: 10px;
+  padding: 12px;
   cursor: pointer;
   color: #fff;
   outline: none;
@@ -69,16 +68,12 @@ button {
   font-weight: bold;
 
   &:active {
-    background-size: 100%;
-    transition: background 0s;
+    transform: scale(.975);
+    transition: .1s;
   }
 
   &.primary {
     background-color: #EC4899;
-
-    &:hover {
-      background: #F9A8D4 radial-gradient(circle, transparent 1%, #F9A8D4 1%) center/15000%;
-    }
   
     &:active {
       background-color: #F9A8D4;
@@ -88,10 +83,6 @@ button {
 
   &.secondary {
     background-color: #000;
-    
-    &:hover {
-      background: #0F172A radial-gradient(circle, transparent 1%, #0F172A 1%) center/15000%;
-    }
   
     &:active {
       background-color: #0F172A;
