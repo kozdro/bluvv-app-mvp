@@ -6,7 +6,7 @@
         :alt="`product ${product.name} image`"
         class="w-full h-32 object-cover rounded-lg mb-4"
       />
-      <h4 class="text-lg font-semibold mb-2 text-center" v-text="product.name" />
+      <h4 class="font-semibold mb-2 text-center" v-text="product.name" />
       <p class="text-gray-500 mb-4 mt-auto" v-text="`$${product.price.toFixed(2)}`" />
     </RouterLink>
     <button

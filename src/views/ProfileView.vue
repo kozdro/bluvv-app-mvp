@@ -1,9 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col p-4 overflow-y-auto">
-    <h1
-      class="text-3xl font-bold mb-10"
-      v-text="isAuthenticated ? 'My Account' : 'Login'"
-    />
+    <h1 class="mb-10" v-text="isAuthenticated ? 'My Account' : 'Login'" />
 
     <form v-if="!isAuthenticated" @submit.prevent="login">
       <div class="mb-4">

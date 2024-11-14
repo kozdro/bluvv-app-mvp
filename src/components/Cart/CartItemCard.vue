@@ -7,7 +7,7 @@
         class="w-16 h-16 rounded-full"
       />
       <div class="flex-1">
-        <h4 class="text-lg font-bold" v-text="item.name" />
+        <h4 class="font-bold" v-text="item.name" />
         <p class="text-gray-500" v-text="`$${item.price.toFixed(2)} x ${item.quantity}`" />
       </div>
     </RouterLink>

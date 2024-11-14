@@ -1,7 +1,7 @@
 <template>
   <div class="fixed bottom-0 w-full bg-white h-1/4 rounded-t-lg p-4 overflow-y-auto z-50">
     <div class="flex justify-between items-center mb-4">
-      <h3 class="text-xl font-bold" v-text="'Share'" />
+      <h3 v-text="'Share'" />
       <button class="text-gray-700 text-xl" @click="$emit('close')">
         &times;
       </button>

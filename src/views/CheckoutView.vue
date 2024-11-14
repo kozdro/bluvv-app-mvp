@@ -1,10 +1,10 @@
 <template>
   <div class="w-full h-full p-6 overflow-y-auto">
-    <h1 class="text-3xl font-bold mb-6" v-text="'Checkout'" />
+    <h1 class="mb-6" v-text="'Checkout'" />
 
     <form @submit.prevent="makeOrder">
       <div class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4" v-text="'Shipping'" />
+        <h2 class="mb-4" v-text="'Shipping'" />
         <div class="flex flex-col gap-4">
           <input type="text" v-model="shippingInfo.fullName" placeholder="Full Name" class="input-field" required disabled />
           <input type="text" v-model="shippingInfo.address" placeholder="Address" class="input-field" required disabled />
@@ -16,7 +16,7 @@
       </div>
 
       <div class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4" v-text="'Payment'" />
+        <h2 class="mb-4" v-text="'Payment'" />
         <div class="flex flex-col gap-4">
           <div class="flex flex-col gap-2">
             <label class="flex items-center gap-2">
@@ -42,7 +42,7 @@
       </div>
 
       <div class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4" v-text="'Order Summary'" />
+        <h2 class="mb-4" v-text="'Order Summary'" />
         <ul class="space-y-4">
           <li v-for="item in cartItems" :key="item.id" class="flex justify-between">
             {{ item.name }}

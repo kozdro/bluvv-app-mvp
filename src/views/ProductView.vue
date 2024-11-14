@@ -18,7 +18,7 @@
       >
       <div class="flex-1 flex flex-col justify-between">
         <div>
-          <h1 class="text-3xl font-bold mb-4" v-text="product.name" />
+          <h1 class="mb-4" v-text="product.name" />
           <p class="text-xl text-gray-800 mb-2" v-text="`$${product.price.toFixed(2)}`" />
           <p class="text-gray-600" v-text="product.description" />
         </div>
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="w-full max-w-2xl mt-6 bg-white p-6 rounded-lg shadow-md">
-      <h2 class="text-2xl font-semibold mb-4" v-text="'Customer Reviews'" />
+      <h2 class="mb-4" v-text="'Customer Reviews'" />
       <ul class="space-y-4">
         <li
           v-for="(review, index) in product.reviews"

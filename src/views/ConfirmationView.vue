@@ -1,14 +1,14 @@
 <template>
   <div class="w-full h-full p-6 overflow-y-auto">
-    <h1 class="text-3xl font-bold mb-6" v-text="'Order Confirmation'" />
+    <h1 class="mb-6" v-text="'Order Confirmation'" />
 
     <div class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4 text-pink-500" v-text="'Thank You for Your Order!'" />
+      <h2 class="mb-4 text-pink-500" v-text="'Thank You for Your Order!'" />
       <p class="text-lg mb-6" v-text="'Your order has been placed successfully.'" />
     </div>
 
     <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4" v-text="'Shipping Information'" />
+      <h3 class="mb-4" v-text="'Shipping Information'" />
       <ul class="space-y-2">
         <li><strong v-text="'Full Name:'"/> {{ orderInfo.shippingInfo.fullName }} </li>
         <li><strong v-text="'Address:'"/> {{ orderInfo.shippingInfo.address }} </li>
@@ -20,12 +20,12 @@
     </div>
 
     <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4" v-text="'Payment Method'" />
+      <h3 class="mb-4" v-text="'Payment Method'" />
       <p v-text="orderInfo.paymentInfo.method" />
     </div>
 
     <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4" v-text="'Order Summary'" />
+      <h3 class="mb-4" v-text="'Order Summary'" />
       <ul class="space-y-4 list-none">
         <li v-for="item in orderInfo.cartItems" :key="item.id" class="flex justify-between">
           <span class="text-pink-500" v-text="item.name" />

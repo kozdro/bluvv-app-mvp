@@ -1,7 +1,7 @@
 <template>
   <div class="fixed bottom-0 w-full bg-white h-2/3 rounded-t-lg p-4 z-50 overflow-hidden flex flex-col">
     <div class="flex justify-between items-center mb-4 border-b pb-2">
-      <h3 class="text-xl font-bold" v-text="'Comments'" />
+      <h3 v-text="'Comments'" />
       <button
         class="text-gray-700 text-xl"
         @click="$emit('close')"

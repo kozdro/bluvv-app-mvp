@@ -8,7 +8,7 @@
   </template>
 
   <div v-else class="h-screen w-full flex items-center justify-center">
-    <h1 class="text-3xl" v-text="'Please use mobile device.'" />
+    <h1 v-text="'Please use mobile device.'" />
   </div>
 </template>
 
@@ -29,6 +29,29 @@ body, html {
 
 main {
   height: calc(100dvh - 4rem);
+}
+
+h1 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 button {

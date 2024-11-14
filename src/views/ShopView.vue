@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full p-4 overflow-y-auto">
-    <h1 class="text-3xl font-bold mb-6" v-text="'Shop'" />
+    <h1 class="mb-6" v-text="'Shop'" />
     <div class="grid grid-cols-2 gap-4">
       <ProductCard
         v-for="(product, index) in products"
