@@ -10,8 +10,8 @@
       :slides-per-view="1"
       direction="vertical"
       loop
-      class="h-full w-full"
       :initial-slide="activeVideoIndex"
+      class="h-full w-full"
       @slideChange="handleSlideChange"
     >
       <SwiperSlide

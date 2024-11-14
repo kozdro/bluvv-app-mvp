@@ -6,12 +6,54 @@
       <div class="mb-8">
         <h2 class="mb-4" v-text="'Shipping'" />
         <div class="flex flex-col gap-4">
-          <input type="text" v-model="shippingInfo.fullName" placeholder="Full Name" class="input-field" required disabled />
-          <input type="text" v-model="shippingInfo.address" placeholder="Address" class="input-field" required disabled />
-          <input type="text" v-model="shippingInfo.city" placeholder="City" class="input-field" required disabled />
-          <input type="text" v-model="shippingInfo.postalCode" placeholder="Postal Code" class="input-field" required disabled />
-          <input type="text" v-model="shippingInfo.country" placeholder="Country" class="input-field" required disabled />
-          <input type="tel" v-model="shippingInfo.phone" placeholder="Phone Number" class="input-field" required disabled />
+          <input
+            v-model="shippingInfo.fullName"
+            type="text"
+            placeholder="Full Name"
+            required
+            disabled
+            class="input-field"
+          >
+          <input
+            v-model="shippingInfo.address"
+            type="text"
+            placeholder="Address"
+            required
+            disabled
+            class="input-field"
+          >
+          <input
+            v-model="shippingInfo.city"
+            type="text" 
+            placeholder="City"
+            required
+            disabled
+            class="input-field"
+          >
+          <input
+            v-model="shippingInfo.postalCode"
+            type="text"
+            placeholder="Postal Code"
+            required
+            disabled
+            class="input-field"
+          >
+          <input
+            v-model="shippingInfo.country"
+            type="text"
+            placeholder="Country"
+            required
+            disabled
+            class="input-field"
+          >
+          <input
+            v-model="shippingInfo.phone"
+            type="tel"
+            placeholder="Phone Number"
+            required
+            disabled
+            class="input-field"
+          >
         </div>
       </div>
 
@@ -20,23 +62,66 @@
         <div class="flex flex-col gap-4">
           <div class="flex flex-col gap-2">
             <label class="flex items-center gap-2">
-              <input type="radio" v-model="paymentInfo.method" value="Bank Transfer" /> Bank Transfer
+              <input
+                type="radio"
+                v-model="paymentInfo.method"
+                value="Bank Transfer"
+              >
+              Bank Transfer
             </label>
             <label class="flex items-center gap-2">
-              <input type="radio" v-model="paymentInfo.method" value="Card" /> Credit/Debit Card
+              <input
+                type="radio"
+                v-model="paymentInfo.method"
+                value="Card"
+              >
+              Credit/Debit Card
             </label>
             <label class="flex items-center gap-2">
-              <input type="radio" v-model="paymentInfo.method" value="PayPal" /> PayPal
+              <input
+                type="radio"
+                v-model="paymentInfo.method"
+                value="PayPal"
+              >
+              PayPal
             </label>
           </div>
 
           <div v-if="paymentInfo.method === 'Card'" class="flex flex-col gap-4">
-            <input type="text" v-model="paymentInfo.cardNumber" placeholder="Card Number" class="input-field" required disabled />
+            <input
+              v-model="paymentInfo.cardNumber"
+              type="text"
+              placeholder="Card Number"
+              required
+              disabled 
+              class="input-field"
+            >
             <div class="flex gap-4">
-              <input type="text" v-model="paymentInfo.expiryDate" placeholder="Expiry Date (MM/YY)" class="input-field" required disabled />
-              <input type="text" v-model="paymentInfo.cvc" placeholder="CVC" class="input-field" required disabled />
+              <input
+                v-model="paymentInfo.expiryDate"
+                type="text"
+                placeholder="Expiry Date (MM/YY)"
+                required
+                disabled 
+                class="input-field"
+              >
+              <input
+                v-model="paymentInfo.cvc"
+                type="text"
+                laceholder="CVC"
+                required
+                disabled
+                class="input-field"
+              >
             </div>
-            <input type="text" v-model="paymentInfo.cardHolderName" placeholder="Cardholder Name" class="input-field" required disabled />
+            <input
+              v-model="paymentInfo.cardHolderName"
+              type="text"
+              placeholder="Cardholder Name"
+              required
+              disabled 
+              class="input-field"
+            >
           </div>
         </div>
       </div>
@@ -44,7 +129,11 @@
       <div class="mb-8">
         <h2 class="mb-4" v-text="'Order Summary'" />
         <ul class="space-y-4">
-          <li v-for="item in cartItems" :key="item.id" class="flex justify-between">
+          <li
+            v-for="item in cartItems"
+            :key="item.id"
+            class="flex justify-between"
+          >
             {{ item.name }}
             <span v-text="`$${item.price.toFixed(2)}`" />
           </li>

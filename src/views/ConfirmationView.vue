@@ -10,12 +10,24 @@
     <div class="mb-8">
       <h3 class="mb-4" v-text="'Shipping Information'" />
       <ul class="space-y-2">
-        <li><strong v-text="'Full Name:'"/> {{ orderInfo.shippingInfo.fullName }} </li>
-        <li><strong v-text="'Address:'"/> {{ orderInfo.shippingInfo.address }} </li>
-        <li><strong v-text="'City:'"/> {{ orderInfo.shippingInfo.city }} </li>
-        <li><strong v-text="'Postal Code:'"/> {{ orderInfo.shippingInfo.postalCode }} </li>
-        <li><strong v-text="'Country:'"/> {{ orderInfo.shippingInfo.country }} </li>
-        <li><strong v-text="'Phone Number:'" /> {{ orderInfo.shippingInfo.phone }} </li>
+        <li>
+          <strong v-text="'Full Name:'"/> {{ orderInfo.shippingInfo.fullName }}
+        </li>
+        <li>
+          <strong v-text="'Address:'"/> {{ orderInfo.shippingInfo.address }}
+        </li>
+        <li>
+          <strong v-text="'City:'"/> {{ orderInfo.shippingInfo.city }}
+        </li>
+        <li>
+          <strong v-text="'Postal Code:'"/> {{ orderInfo.shippingInfo.postalCode }}
+        </li>
+        <li>
+          <strong v-text="'Country:'"/> {{ orderInfo.shippingInfo.country }}
+        </li>
+        <li>
+          <strong v-text="'Phone Number:'" /> {{ orderInfo.shippingInfo.phone }}
+        </li>
       </ul>
     </div>
 
@@ -27,7 +39,11 @@
     <div class="mb-8">
       <h3 class="mb-4" v-text="'Order Summary'" />
       <ul class="space-y-4 list-none">
-        <li v-for="item in orderInfo.cartItems" :key="item.id" class="flex justify-between">
+        <li
+          v-for="item in orderInfo.cartItems"
+          :key="item.id"
+          class="flex justify-between"
+        >
           <span class="text-pink-500" v-text="item.name" />
           <span v-text="`$${item.price.toFixed(2)}`" />
         </li>
