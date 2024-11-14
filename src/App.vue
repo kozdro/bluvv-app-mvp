@@ -30,4 +30,48 @@ body, html {
 main {
   height: calc(100dvh - 4rem);
 }
+
+button {
+ &.primary,
+ &.secondary {
+  background-position: center;
+  transition: background 0.8s;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+  outline: none;
+  width: 100%;
+  font-weight: bold;
+
+  &.primary {
+    background-color: #EC4899;
+
+    &:hover {
+      background: #F9A8D4 radial-gradient(circle, transparent 1%, #F9A8D4 1%) center/15000%;
+    }
+  
+    &:active {
+      background-color: #F9A8D4;
+      background-size: 100%;
+      transition: background 0s;
+    }
+  }
+ }
+
+  &.secondary {
+    background-color: #000;
+    
+    &:hover {
+      background: #0F172A radial-gradient(circle, transparent 1%, #0F172A 1%) center/15000%;
+    }
+  
+    &:active {
+      background-color: #0F172A;
+      background-size: 100%;
+      transition: background 0s;
+    }
+  }
+}
 </style>

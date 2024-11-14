@@ -7,7 +7,7 @@
         {{ video.productName }}
       </div>
       <button
-        class="bg-pink-500 rounded-full w-14 h-14 text-xs flex items-center justify-center text-center text-white font-bold"
+        class="primary !rounded-full !w-14 !h-14 text-xs flex items-center justify-center text-center"
         v-text="'Add to Cart'"
       />
     </div>

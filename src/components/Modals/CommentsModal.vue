@@ -26,7 +26,7 @@
       </ul>
     </div>
 
-    <button class="mt-auto w-full py-2 bg-gray-200 text-gray-700 rounded-lg font-bold" v-text="'Load More Comments'" />
+    <button class="secondary mt-auto" v-text="'Load More Comments'" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center bg-white p-4 rounded-lg shadow-md h-80">
+  <div class="flex flex-col items-center bg-white p-4 rounded-lg shadow-md h-[324px]">
     <RouterLink :to="`/product/${product.name.toLowerCase().replace(/\s+/g, '-')}`" class="flex-1 flex flex-col items-center cursor-pointer">
       <img
         :src="product.image"
@@ -10,7 +10,7 @@
       <p class="text-gray-500 mb-4 mt-auto" v-text="`$${product.price.toFixed(2)}`" />
     </RouterLink>
     <button
-      class="w-full bg-pink-500 text-white py-2 rounded-lg font-bold hover:bg-pink-300 active:bg-pink-300 transition mt-auto"
+      class="primary mt-auto"
       v-text="'Add to Cart'"
       @click="addToCart(product)"
     />

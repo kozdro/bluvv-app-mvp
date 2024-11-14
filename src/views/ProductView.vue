@@ -23,7 +23,7 @@
           <p class="text-gray-600" v-text="product.description" />
         </div>
         <button
-          class="mt-6 w-full bg-pink-500 text-white py-2 rounded-lg font-bold hover:bg-pink-300 active:bg-pink-300 transition"
+          class="primary mt-6"
           @click="addToCart(product)"
           v-text="'Add to Cart'"
         />
@@ -47,7 +47,7 @@
           <p class="text-gray-800" v-text="review.comment" />
         </li>
       </ul>
-      <button class="mt-4 bg-black hover:bg-slate-900 active:bg-slate-900 text-white p-3 rounded-lg font-bold w-full transition" v-text="'Load More Reviews'" />
+      <button class="secondary mt-4" v-text="'Load More Reviews'" />
     </div>
   </div>
 </template>

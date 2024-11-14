@@ -19,10 +19,10 @@
         :key="index"
         class="w-full h-full relative bg-black"
       >
-        <div class="absolute top-0 right-0 w-36 bg-black bg-opacity-30 text-white p-2 rounded-bl-2xl z-30">
+        <button class="absolute top-0 right-0 w-36 bg-black bg-opacity-30 text-white p-2 rounded-bl-2xl z-30" @click="$router.push('/profile')">
           Earnings: 
           <span class="font-bold text-pink-300" v-text="` €${totalEarnings.toFixed(2)}`" />
-        </div>
+        </button>
         <video
           :ref="el => videoRef[index] = el"
           :src="video.url"
@@ -109,7 +109,7 @@
             </RouterLink>
             <button
               type="button"
-              class="bg-pink-500 hover:bg-pink-300 active:bg-pink-300 rounded-full w-14 h-14 text-xs flex items-center justify-center text-center text-white font-bold"
+              class="primary !rounded-full !w-14 !h-14 text-xs flex items-center justify-center text-center !p-0"
               v-text="'Add to Cart'"
               @click="addToCart(video.product)"
             />

@@ -11,7 +11,7 @@
     <div v-else class="text-center mt-20">
       <h3 class="text-xl font-semibold text-gray-600" v-text="'Your cart is empty'" />
       <RouterLink to="/" class="text-blue-500 hover:underline active:underline mt-4 block">
-        <button class="bg-black hover:bg-slate-900 active:bg-slate-900 text-white p-3 rounded-lg font-bold w-full transition" v-text="'Continue shopping'" />
+        <button class="secondary" v-text="'Continue shopping'" />
       </RouterLink>
     </div>
     <div v-if="cartItems.length" class="mt-auto">
@@ -20,7 +20,7 @@
         <span class="text-xl" v-text="`$${totalPrice.toFixed(2)}`" />
       </div>
       <RouterLink to="/checkout">
-        <button class="w-full bg-pink-500 text-white py-3 rounded-lg font-bold hover:bg-pink-300 active:bg-pink-300 transition" v-text="'Checkout'" />
+        <button class="primary" v-text="'Checkout'" />
       </RouterLink>
     </div>
   </div>
