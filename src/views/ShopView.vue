@@ -14,11 +14,7 @@
 <script setup>
 import ProductCard from '@/components/ProductCard.vue'
 
-const products = [
-  { name: 'Black Sheet Mask', price: 4.34, image: require('@/assets/photos/mask.jpg') },
-  { name: 'Gel Face Cream', price: 18.95, image: require('@/assets/photos/cream.jpeg') },
-  { name: 'Curling Iron', price: 79.90, image: require('@/assets/photos/iron.jpeg') },
-  { name: 'Pinky Blush', price: 12.65, image: require('@/assets/photos/blush.jpg') },
-  { name: 'Mascara High Volume', price: 25.40, image: require('@/assets/photos/mascara.jpg') },
-]
+import useProducts from '@/composables/useProducts.js'
+
+const { products } = useProducts()
 </script>

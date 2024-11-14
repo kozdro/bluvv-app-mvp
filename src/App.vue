@@ -45,6 +45,11 @@ button {
   width: 100%;
   font-weight: bold;
 
+  &:active {
+    background-size: 100%;
+    transition: background 0s;
+  }
+
   &.primary {
     background-color: #EC4899;
 
@@ -54,8 +59,6 @@ button {
   
     &:active {
       background-color: #F9A8D4;
-      background-size: 100%;
-      transition: background 0s;
     }
   }
  }
@@ -69,8 +72,6 @@ button {
   
     &:active {
       background-color: #0F172A;
-      background-size: 100%;
-      transition: background 0s;
     }
   }
 }
