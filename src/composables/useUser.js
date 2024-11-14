@@ -9,7 +9,7 @@ export default () => {
   const errorMessage = ref('')
 
   const login = () => {
-    if (email.value === 'test.user@gmail.com' && password.value === 'testPassword') {
+    if (email.value === process.env.LOGIN_MAIL && password.value === process.env.LOGIN_PASSWORD) {
       isAuthenticated.value = true
       errorMessage.value = ''
     } else {
