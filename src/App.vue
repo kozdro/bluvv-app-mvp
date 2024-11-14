@@ -22,36 +22,36 @@ const device = useDevice()
 
 <style lang="scss">
 body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
 }
 
 main {
-  height: calc(100dvh - 4rem);
+  height: calc(100dvh - 4rem) !important;
 }
 
 h1 {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-  font-weight: 700;
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important;
+  font-weight: 700 !important;
 }
 
 h2 {
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 600;
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+  font-weight: 600 !important;
 }
 
 h3 {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 500;
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
+  font-weight: 500 !important;
 }
 
 h4 {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
 }
 
 button {
